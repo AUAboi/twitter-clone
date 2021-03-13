@@ -11,6 +11,8 @@ window.Vue = require("vue").default;
 import Vuex from "vuex";
 Vue.use(Vuex);
 
+import VueObserveVisibility from "vue-observe-visibility";
+Vue.use(VueObserveVisibility);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -33,6 +35,7 @@ files.keys().map(key =>
 // Vue.component('app-timeline', require('./components/timeline/AppTimeline.vue').default);
 
 import timeline from "./store/timeline";
+import Vue from "vue";
 
 const store = new Vuex.Store({
     modules: {

@@ -1,6 +1,10 @@
 <template>
 	<div>
 		<AppTweet v-for="tweet in tweets" :key="tweet.id" :tweet="tweet" />
+		<div
+			v-if="tweets.length"
+			v-observe-visibility="{ callback: handleScrollToBottomOfTimeline }"
+		></div>
 	</div>
 </template>
 
@@ -8,18 +12,48 @@
 import { mapGetters, mapActions } from "vuex";
 
 export default {
+	data() {
+		return {
+			page: 1,
+			lastPage: 1
+		};
+	},
 	computed: {
 		...mapGetters({
 			tweets: "timeline/tweets"
-		})
+		}),
+
+		urlWithPage() {
+			return `api/timeline?page=${this.page}`;
+		}
 	},
 	methods: {
 		...mapActions({
 			getTweets: "timeline/getTweets"
-		})
+		}),
+
+		loadTweets() {
+			this.getTweets(this.urlWithPage).then(res => {
+				this.lastPage = res.data.meta.last_page;
+			});
+		},
+
+		handleScrollToBottomOfTimeline(isVisible) {
+			if (!isVisible) {
+				return;
+			}
+
+			if (this.lastPage === this.page) {
+				return;
+			}
+
+			this.page++;
+
+			this.loadTweets();
+		}
 	},
 	mounted() {
-		this.getTweets();
+		this.loadTweets();
 	}
 };
 </script>
