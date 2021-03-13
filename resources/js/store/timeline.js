@@ -1,11 +1,26 @@
+import axios from "axios";
 export default {
+    namespaced: true,
     state: {
         tweets: []
     },
 
-    getters: {},
+    getters: {
+        tweets(state) {
+            return state.tweets;
+        }
+    },
 
-    mutations: {},
+    mutations: {
+        PUSH_TWEETS(state, data) {
+            state.tweets.push(...data);
+        }
+    },
 
-    actions: {}
+    actions: {
+        async getTweets({ commit }) {
+            let res = await axios.get("/api/timeline");
+            commit("PUSH_TWEETS", res.data.data);
+        }
+    }
 };

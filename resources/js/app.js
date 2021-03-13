@@ -32,6 +32,14 @@ files.keys().map(key =>
 
 // Vue.component('app-timeline', require('./components/timeline/AppTimeline.vue').default);
 
+import timeline from "./store/timeline";
+
+const store = new Vuex.Store({
+    modules: {
+        timeline
+    }
+});
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -39,5 +47,6 @@ files.keys().map(key =>
  */
 
 const app = new Vue({
-    el: "#app"
+    el: "#app",
+    store
 });
