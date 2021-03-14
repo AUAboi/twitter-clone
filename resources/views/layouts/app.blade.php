@@ -14,7 +14,11 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
+    <script>
+        window.Laravel = {
+            csrfToken: "{{ csrf_token() }}"
+        };
+    </script>
     <script>
         window.User = {
             id:  {{ optional(auth()->user())->id }}, 
