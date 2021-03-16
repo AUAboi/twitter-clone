@@ -12,8 +12,13 @@ export default {
     },
 
     mutations: {
+        //data.filter removes any tweets with duplicate ids
         PUSH_TWEETS(state, data) {
-            state.tweets.push(...data);
+            state.tweets.push(
+                ...data.filter(tweet => {
+                    return !state.tweets.map(t => t.id).includes(tweet.id);
+                })
+            );
         }
     },
 
