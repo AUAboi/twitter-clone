@@ -18,7 +18,7 @@ class TweetResource extends JsonResource
         return [
             'id' => $this->id,
             'body' => $this->body,
-            'original_tweet' => new TweetResource($this->original_tweet),
+            'original_tweet' => new TweetResource($this->originalTweet),
             'user' => new UserResource($this->user),
             'created_at' => $this->created_at->timestamp
         ];
