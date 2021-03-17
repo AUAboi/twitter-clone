@@ -14,6 +14,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/294f177ac8.js" crossorigin="anonymous"></script>
+
     <script>
         window.Laravel = {
             csrfToken: "{{ csrf_token() }}"

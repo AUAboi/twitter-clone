@@ -1,14 +1,6 @@
 <template>
 	<div class="w-full inline-block border-b border-gray-800 hover:bg-gray-800">
-		<div class="flex w-full">
-			<div class="mr-3">
-				<img :src="tweet.user.avatar" class="w-12 rounded-full" />
-			</div>
-			<div>
-				<AppTweetUsername :user="tweet.user" />
-				<p class="text-gray-300 whitespace-pre-wrap">{{ tweet.body }}</p>
-			</div>
-		</div>
+		<component :is="`app-tweet-variant-${tweet.type}`" :tweet="tweet" />
 	</div>
 </template>
 
@@ -25,4 +17,4 @@ export default {
 </script>
 
 <style>
-</style>
+</style>s
