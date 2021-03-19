@@ -38,6 +38,8 @@ files.keys().map(key =>
 // Vue.component('app-timeline', require('./components/timeline/AppTimeline.vue').default);
 
 import timeline from "./store/timeline";
+import likes from "./store/likes";
+
 import Vue from "vue";
 
 const store = new Vuex.Store({

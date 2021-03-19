@@ -27,6 +27,11 @@ export default {
             let res = await axios.get(url);
             commit("PUSH_TWEETS", res.data.data);
 
+            //Grabs likes from api response
+            commit("likes/PUSH_LIKES", response.data.meta.likes, {
+                root: true
+            });
+
             return res;
         }
     }
