@@ -7,13 +7,21 @@
 			<AppTweetRetweetAction />
 		</li>
 		<li class="w-3/4">
-			<AppTweetLikeAction />
+			<AppTweetLikeAction :tweet="tweet" />
 		</li>
 	</ul>
 </template>
 
 <script>
-export default {};
+export default {
+	name: "AppTweetActionGroup",
+	props: {
+		tweet: {
+			required: true,
+			type: Object
+		}
+	}
+};
 </script>
 
 <style>

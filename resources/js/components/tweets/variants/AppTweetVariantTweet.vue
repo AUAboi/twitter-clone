@@ -6,7 +6,7 @@
 		<div class="flex-grow">
 			<AppTweetUsername :user="tweet.user" type="" />
 			<p class="text-gray-300 whitespace-pre-wrap">{{ tweet.body }}</p>
-			<AppTweetActionGroup />
+			<AppTweetActionGroup :tweet="tweet" />
 		</div>
 	</div>
 </template>
