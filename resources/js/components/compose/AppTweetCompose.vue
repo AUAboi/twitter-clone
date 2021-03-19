@@ -34,6 +34,9 @@ export default {
 	},
 	methods: {
 		async submit() {
+			if (this.form.body === "") {
+				return;
+			}
 			await axios.post("api/tweets", this.form);
 			this.form.body = "";
 		}
