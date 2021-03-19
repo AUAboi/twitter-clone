@@ -28,7 +28,7 @@ export default {
             commit("PUSH_TWEETS", res.data.data);
 
             //Grabs likes from api response
-            commit("likes/PUSH_LIKES", response.data.meta.likes, {
+            commit("likes/PUSH_LIKES", res.data.meta.likes, {
                 root: true
             });
 
