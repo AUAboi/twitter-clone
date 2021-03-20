@@ -1,3 +1,4 @@
+//Grabs users like
 export default {
     namespaced: true,
 

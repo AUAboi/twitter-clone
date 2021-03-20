@@ -2162,6 +2162,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2169,8 +2176,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "AppTweetLikeAction",
   props: {
@@ -2178,7 +2184,15 @@ __webpack_require__.r(__webpack_exports__);
       required: true,
       type: Object
     }
-  }
+  },
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)({
+    likes: "likes/likes"
+  })), {}, {
+    liked: function liked() {
+      //check if users like includes this tweet
+      return this.likes.includes(this.tweet.id);
+    }
+  })
 });
 
 /***/ }),
@@ -2346,7 +2360,8 @@ files.keys().map(function (key) {
 
 var store = new vuex__WEBPACK_IMPORTED_MODULE_1__.default.Store({
   modules: {
-    timeline: _store_timeline__WEBPACK_IMPORTED_MODULE_3__.default
+    timeline: _store_timeline__WEBPACK_IMPORTED_MODULE_3__.default,
+    likes: _store_likes__WEBPACK_IMPORTED_MODULE_4__.default
   }
 });
 /**
@@ -2437,6 +2452,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
+//Grabs users like
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   namespaced: true,
   state: {
@@ -2530,7 +2546,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
               case 3:
                 res = _context.sent;
-                commit("PUSH_TWEETS", res.data.data); //Grabs likes from api response
+                commit("PUSH_TWEETS", res.data.data); //Grabs users likes from api response
 
                 commit("likes/PUSH_LIKES", res.data.meta.likes, {
                   root: true
@@ -45936,9 +45952,14 @@ var render = function() {
       attrs: { href: "" }
     },
     [
-      _c("i", { staticClass: "far fa-heart mx-2" }),
+      _c("i", {
+        staticClass: "far fa-heart mx-2",
+        class: _vm.liked ? "text-red-600" : ""
+      }),
       _vm._v(" "),
-      _c("span", [_vm._v("\n\t\t" + _vm._s(_vm.tweet.likes_count) + "\n\t")])
+      _c("span", { class: _vm.liked ? "text-red-600" : "" }, [
+        _vm._v(_vm._s(_vm.tweet.likes_count))
+      ])
     ]
   )
 }

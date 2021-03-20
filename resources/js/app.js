@@ -44,7 +44,8 @@ import Vue from "vue";
 
 const store = new Vuex.Store({
     modules: {
-        timeline
+        timeline,
+        likes
     }
 });
 
