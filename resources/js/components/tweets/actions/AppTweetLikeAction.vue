@@ -1,12 +1,16 @@
 <template>
-	<a href="" class="text-gray-600 flex items-center text-base">
+	<a
+		@click.prevent="likeOrUnlike"
+		href="#"
+		class="text-gray-600 flex items-center text-base"
+	>
 		<i :class="liked ? 'text-red-600' : ''" class="far fa-heart mx-2"></i>
 		<span :class="liked ? 'text-red-600' : ''">{{ tweet.likes_count }}</span>
 	</a>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
 	name: "AppTweetLikeAction",
@@ -14,6 +18,22 @@ export default {
 		tweet: {
 			required: true,
 			type: Object
+		}
+	},
+
+	methods: {
+		...mapActions({
+			likeTweet: "likes/likeTweet",
+			unlikeTweet: "likes/unlikeTweet"
+		}),
+
+		likeOrUnlike() {
+			if (this.liked) {
+				this.unlikeTweet(this.tweet);
+				return;
+			}
+
+			this.likeTweet(this.tweet);
 		}
 	},
 
