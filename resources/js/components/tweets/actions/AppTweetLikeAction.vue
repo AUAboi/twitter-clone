@@ -27,11 +27,15 @@ export default {
 		}),
 		...mapActions({
 			likeTweet: "likes/likeTweet",
-			unlikeTweet: "likes/unlikeTweet"
+			unlikeTweet: "likes/unlikeTweet",
+			syncLike: "likes/syncLike"
 		}),
 
 		likeOrUnlike() {
 			Echo.channel("tweets").listen(".TweetLikesWereUpdated", e => {
+				if (e.user_id === User.id) {
+					this.syncLike(e.id);
+				}
 				this.SET_LIKES(e);
 			});
 
