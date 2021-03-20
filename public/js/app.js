@@ -2189,11 +2189,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       type: Object
     }
   },
-  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)({
+  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)({
+    SET_LIKES: "timeline/SET_LIKES"
+  })), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)({
     likeTweet: "likes/likeTweet",
     unlikeTweet: "likes/unlikeTweet"
   })), {}, {
     likeOrUnlike: function likeOrUnlike() {
+      var _this = this;
+
+      Echo.channel("tweets").listen(".TweetLikesWereUpdated", function (e) {
+        _this.SET_LIKES(e);
+      });
+
       if (this.liked) {
         this.unlikeTweet(this.tweet);
         return;
@@ -2593,17 +2601,28 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
           return t.id;
         }).includes(tweet.id);
       })));
+    },
+    SET_LIKES: function SET_LIKES(state, _ref) {
+      var id = _ref.id,
+          count = _ref.count;
+      state.tweets = state.tweets.map(function (tweet) {
+        if (tweet.id === id) {
+          tweet.likes_count = count;
+        }
+
+        return tweet;
+      });
     }
   },
   actions: {
-    getTweets: function getTweets(_ref, url) {
+    getTweets: function getTweets(_ref2, url) {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
         var commit, res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                commit = _ref.commit;
+                commit = _ref2.commit;
                 _context.next = 3;
                 return axios__WEBPACK_IMPORTED_MODULE_1___default().get(url);
 

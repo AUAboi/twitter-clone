@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapMutations, mapActions } from "vuex";
 
 export default {
 	name: "AppTweetLikeAction",
@@ -22,12 +22,19 @@ export default {
 	},
 
 	methods: {
+		...mapMutations({
+			SET_LIKES: "timeline/SET_LIKES"
+		}),
 		...mapActions({
 			likeTweet: "likes/likeTweet",
 			unlikeTweet: "likes/unlikeTweet"
 		}),
 
 		likeOrUnlike() {
+			Echo.channel("tweets").listen(".TweetLikesWereUpdated", e => {
+				this.SET_LIKES(e);
+			});
+
 			if (this.liked) {
 				this.unlikeTweet(this.tweet);
 				return;

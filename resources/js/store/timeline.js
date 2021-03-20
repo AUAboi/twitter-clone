@@ -19,6 +19,16 @@ export default {
                     return !state.tweets.map(t => t.id).includes(tweet.id);
                 })
             );
+        },
+
+        SET_LIKES(state, { id, count }) {
+            state.tweets = state.tweets.map(tweet => {
+                if (tweet.id === id) {
+                    tweet.likes_count = count;
+                }
+
+                return tweet;
+            });
         }
     },
 
