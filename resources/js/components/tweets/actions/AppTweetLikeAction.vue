@@ -32,13 +32,6 @@ export default {
 		}),
 
 		likeOrUnlike() {
-			Echo.channel("tweets").listen(".TweetLikesWereUpdated", e => {
-				if (e.user_id === User.id) {
-					this.syncLike(e.id);
-				}
-				this.SET_LIKES(e);
-			});
-
 			if (this.liked) {
 				this.unlikeTweet(this.tweet);
 				return;
@@ -47,7 +40,6 @@ export default {
 			this.likeTweet(this.tweet);
 		}
 	},
-
 	computed: {
 		...mapGetters({
 			likes: "likes/likes"
@@ -57,6 +49,7 @@ export default {
 			//check if users like includes this tweet
 			return this.likes.includes(this.tweet.id);
 		}
-	}
+	},
+	mounted() {}
 };
 </script>

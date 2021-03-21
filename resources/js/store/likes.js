@@ -1,5 +1,7 @@
 import axios from "axios";
+
 import { without } from "lodash";
+
 export default {
     namespaced: true,
 
@@ -43,6 +45,7 @@ export default {
                 commit("POP_LIKE", id);
                 return;
             }
+
             commit("PUSH_LIKE", id);
         }
     }

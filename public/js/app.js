@@ -2197,16 +2197,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     syncLike: "likes/syncLike"
   })), {}, {
     likeOrUnlike: function likeOrUnlike() {
-      var _this = this;
-
-      Echo.channel("tweets").listen(".TweetLikesWereUpdated", function (e) {
-        if (e.user_id === User.id) {
-          _this.syncLike(e.id);
-        }
-
-        _this.SET_LIKES(e);
-      });
-
       if (this.liked) {
         this.unlikeTweet(this.tweet);
         return;
@@ -2222,7 +2212,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       //check if users like includes this tweet
       return this.likes.includes(this.tweet.id);
     }
-  })
+  }),
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -2403,6 +2394,13 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__.default.Store({
 var app = new vue__WEBPACK_IMPORTED_MODULE_0__.default({
   el: "#app",
   store: store
+});
+Echo.channel("tweets").listen(".TweetLikesWereUpdated", function (e) {
+  if (e.user_id === User.id) {
+    store.dispatch("likes/syncLike", e.id);
+  }
+
+  store.commit("timeline/SET_LIKES", e);
 });
 
 /***/ }),
