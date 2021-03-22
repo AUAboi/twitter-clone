@@ -4,7 +4,7 @@
 			<AppTweetReplyAction />
 		</li>
 		<li class="w-3/4">
-			<AppTweetRetweetAction />
+			<AppTweetRetweetAction :tweet="tweet" />
 		</li>
 		<li class="w-3/4">
 			<AppTweetLikeAction :tweet="tweet" />

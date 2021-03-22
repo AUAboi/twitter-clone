@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use PDO;
+use App\Models\Tweet;
+use App\Tweets\TweetType;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use PDO;
 
 class User extends Authenticatable
 {
@@ -92,6 +94,13 @@ class User extends Authenticatable
     public function likes()
     {
         return $this->hasMany(Like::class);
+    }
+
+    public function retweets()
+    {
+        return $this->hasMany(Tweet::class)
+            ->where('type', TweetType::RETWEET)
+            ->orWhere('type', TweetType::QUOTE);
     }
 
     public function hasLiked(Tweet $tweet)

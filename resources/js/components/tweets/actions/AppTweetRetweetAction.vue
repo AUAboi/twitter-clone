@@ -3,7 +3,7 @@
 		<template slot="trigger">
 			<a href="#" class="text-gray-600 flex items-center text-base">
 				<i class="fas fa-retweet mx-2"></i>
-				<span>0</span>
+				<span>{{ tweet.retweets_count }}</span>
 			</a>
 		</template>
 
@@ -15,3 +15,15 @@
 		</AppDropdownItem>
 	</AppDropdown>
 </template>
+
+<script>
+export default {
+	name: "AppTweetRetweetAction",
+	props: {
+		tweet: {
+			required: true,
+			type: Object
+		}
+	}
+};
+</script>
