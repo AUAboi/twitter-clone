@@ -47,6 +47,10 @@ export default {
             commit("likes/PUSH_LIKES", res.data.meta.likes, {
                 root: true
             });
+            //Simillarly, grabs retweets
+            commit("retweets/PUSH_RETWEETS", res.data.meta.retweets, {
+                root: true
+            });
 
             return res;
         }
