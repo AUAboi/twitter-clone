@@ -7,7 +7,11 @@
 			</a>
 		</template>
 
-		<AppDropdownItem />
-		<AppDropdownItem />
+		<AppDropdownItem>
+			Retweet
+		</AppDropdownItem>
+		<AppDropdownItem>
+			Retweet with comment
+		</AppDropdownItem>
 	</AppDropdown>
 </template>

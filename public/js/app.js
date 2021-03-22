@@ -46579,9 +46579,9 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c("AppDropdownItem"),
+      _c("AppDropdownItem", [_vm._v("\n\t\tRetweet\n\t")]),
       _vm._v(" "),
-      _c("AppDropdownItem")
+      _c("AppDropdownItem", [_vm._v("\n\t\tRetweet with comment\n\t")])
     ],
     2
   )
