@@ -5,7 +5,7 @@
 		</div>
 		<div
 			v-show="open"
-			class="absolute bg-gray-900 z-50 rounded-lg w-56 overflow-hidden"
+			class="absolute bg-gray-900 z-50 rounded-lg w-56 overflow-hidden shadow-light"
 		>
 			<slot />
 		</div>

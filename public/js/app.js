@@ -46244,7 +46244,7 @@ var render = function() {
             }
           ],
           staticClass:
-            "absolute bg-gray-900 z-50 rounded-lg w-56 overflow-hidden"
+            "absolute bg-gray-900 z-50 rounded-lg w-56 overflow-hidden shadow-light"
         },
         [_vm._t("default")],
         2
@@ -46287,7 +46287,8 @@ var render = function() {
         }
       }
     },
-    [_vm._v("\n\tRetweet\n")]
+    [_vm._t("default")],
+    2
   )
 }
 var staticRenderFns = []
