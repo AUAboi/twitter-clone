@@ -1,9 +1,13 @@
 <template>
 	<AppDropdown>
 		<template slot="trigger">
-			<a href="#" class="text-gray-600 flex items-center text-base">
+			<a
+				:class="retweeted ? 'text-green-600' : ''"
+				href="#"
+				class="text-gray-600 flex items-center text-base"
+			>
 				<i class="fas fa-retweet mx-2"></i>
-				<span :class="retweeted? 'text-green-600': ''">{{ tweet.retweets_count }}</span>
+				<span>{{ tweet.retweets_count }}</span>
 			</a>
 		</template>
 

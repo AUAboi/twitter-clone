@@ -2334,6 +2334,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "AppTweetRetweetAction",
@@ -46699,14 +46703,13 @@ var render = function() {
           "a",
           {
             staticClass: "text-gray-600 flex items-center text-base",
+            class: _vm.retweeted ? "text-green-600" : "",
             attrs: { href: "#" }
           },
           [
             _c("i", { staticClass: "fas fa-retweet mx-2" }),
             _vm._v(" "),
-            _c("span", { class: _vm.retweeted ? "text-green-600" : "" }, [
-              _vm._v(_vm._s(_vm.tweet.retweets_count))
-            ])
+            _c("span", [_vm._v(_vm._s(_vm.tweet.retweets_count))])
           ]
         )
       ]),
