@@ -2331,6 +2331,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "AppTweetRetweetAction",
@@ -2345,6 +2353,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   })), {}, {
     retweeted: function retweeted() {
       return this.retweets.includes(this.tweet.id);
+    }
+  }),
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)({
+    retweetTweet: "retweets/retweetTweet",
+    unretweetTweet: "retweets/unretweetTweet"
+  })), {}, {
+    retweetOrUnretweet: function retweetOrUnretweet() {
+      if (this.retweeted) {
+        this.unretweetTweet(this.tweet);
+        return;
+      }
+
+      this.retweetTweets(this.tweet);
     }
   })
 });
@@ -2369,6 +2390,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
 //
 //
 //
@@ -46855,20 +46877,53 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "AppDropdown",
+    "div",
     [
-      _c(
-        "template",
-        { slot: "trigger" },
-        [_c("AppTweetRetweetAction", { attrs: { tweet: _vm.tweet } })],
-        1
-      ),
-      _vm._v(" "),
-      _c("AppDropdownItem", [_vm._v("\n\t\tRetweet\n\t")]),
-      _vm._v(" "),
-      _c("AppDropdownItem", [_vm._v("\n\t\tRetweet with comment\n\t")])
+      !_vm.retweeted
+        ? _c(
+            "AppDropdown",
+            [
+              _c(
+                "template",
+                { slot: "trigger" },
+                [
+                  _c("AppTweetRetweetActionButton", {
+                    attrs: { tweet: _vm.tweet }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "AppDropdownItem",
+                {
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.retweetOrUnretweet($event)
+                    }
+                  }
+                },
+                [_vm._v("\n\t\t\tRetweet\n\t\t")]
+              ),
+              _vm._v(" "),
+              _c("AppDropdownItem", [
+                _vm._v("\n\t\t\tRetweet with comment\n\t\t")
+              ])
+            ],
+            2
+          )
+        : _c("AppTweetRetweetActionButton", {
+            attrs: { tweet: _vm.tweet },
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                return _vm.retweetOrUnretweet($event)
+              }
+            }
+          })
     ],
-    2
+    1
   )
 }
 var staticRenderFns = []
@@ -46899,7 +46954,12 @@ var render = function() {
     {
       staticClass: "text-gray-600 flex items-center text-base",
       class: _vm.retweeted ? "text-green-600" : "",
-      attrs: { href: "#" }
+      attrs: { href: "#" },
+      on: {
+        click: function($event) {
+          return _vm.$emit("click", $event)
+        }
+      }
     },
     [
       _c("i", { staticClass: "fas fa-retweet mx-2" }),

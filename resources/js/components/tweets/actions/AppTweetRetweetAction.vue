@@ -1,20 +1,28 @@
 <template>
-	<AppDropdown>
-		<template slot="trigger">
-			<AppTweetRetweetAction :tweet="tweet" />
-		</template>
+	<div>
+		<AppDropdown v-if="!retweeted">
+			<template slot="trigger">
+				<AppTweetRetweetActionButton :tweet="tweet" />
+			</template>
 
-		<AppDropdownItem>
-			Retweet
-		</AppDropdownItem>
-		<AppDropdownItem>
-			Retweet with comment
-		</AppDropdownItem>
-	</AppDropdown>
+			<AppDropdownItem @click.prevent="retweetOrUnretweet">
+				Retweet
+			</AppDropdownItem>
+			<AppDropdownItem>
+				Retweet with comment
+			</AppDropdownItem>
+		</AppDropdown>
+		<!-- If not retweeted, unretweet on click -->
+		<AppTweetRetweetActionButton
+			@click.prevent="retweetOrUnretweet"
+			v-else
+			:tweet="tweet"
+		/>
+	</div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
 	name: "AppTweetRetweetAction",
@@ -31,6 +39,21 @@ export default {
 
 		retweeted() {
 			return this.retweets.includes(this.tweet.id);
+		}
+	},
+	methods: {
+		...mapActions({
+			retweetTweet: "retweets/retweetTweet",
+			unretweetTweet: "retweets/unretweetTweet"
+		}),
+
+		retweetOrUnretweet() {
+			if (this.retweeted) {
+				this.unretweetTweet(this.tweet);
+				return;
+			}
+
+			this.retweetTweets(this.tweet);
 		}
 	}
 };
