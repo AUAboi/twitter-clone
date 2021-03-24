@@ -53,7 +53,7 @@ export default {
 				return;
 			}
 
-			this.retweetTweets(this.tweet);
+			this.retweetTweet(this.tweet);
 		}
 	}
 };

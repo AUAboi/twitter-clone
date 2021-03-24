@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Tweets\TweetController;
 use App\Http\Controllers\Api\Timeline\TimelineController;
 use App\Http\Controllers\Api\Tweets\TweetLikeController;
-use App\Http\Controllers\Tweets\TweetRetweetController;
+use App\Http\Controllers\Api\Tweets\TweetRetweetController;
 
 Route::get('/timeline', [TimelineController::class, 'index'])->name('timeline');
 

@@ -2365,7 +2365,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         return;
       }
 
-      this.retweetTweets(this.tweet);
+      this.retweetTweet(this.tweet);
     }
   })
 });
