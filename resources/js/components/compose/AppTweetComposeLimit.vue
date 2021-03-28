@@ -1,6 +1,6 @@
 <template>
 	<div class="h-10 w-10 relative">
-		<svg viewBox="0 0 120 120">
+		<svg class="transform -rotate-90" viewBox="0 0 120 120">
 			<circle
 				cx="60"
 				cy="60"
@@ -15,8 +15,10 @@
 				fill="none"
 				stroke-width="8"
 				:r="radius"
-				class="stroke-current text-blue-500"
-				:stroke-dasharray
+				class="stroke-current"
+				:class="percentageIsOver ? 'text-red-500' : 'text-blue-500'"
+				:stroke-dasharray="dash"
+				:stroke-dashoffset="offset"
 			/>
 		</svg>
 	</div>
@@ -25,6 +27,12 @@
 <script>
 export default {
 	name: "AppTweetComposeLimit",
+	props: {
+		body: {
+			required: true,
+			type: String
+		}
+	},
 	data() {
 		return {
 			radius: 30
@@ -34,10 +42,23 @@ export default {
 		dash() {
 			//to get diameter for dash/cut
 			return 2 * Math.PI * this.radius;
+		},
+		percentage() {
+			return Math.round(this.body.length * 100) / 280;
+		},
+		percentageIsOver() {
+			return this.percentage > 100;
+		},
+		displayPercentage() {
+			return this.percentage <= 100 ? this.percentage : 100;
+		},
+
+		offset() {
+			let circ = this.dash;
+			let progress = this.displayPercentage / 100;
+
+			return circ * (1 - progress);
 		}
 	}
 };
 </script>
-
-<style>
-</style>

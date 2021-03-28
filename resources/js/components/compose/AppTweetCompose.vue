@@ -8,8 +8,8 @@
 			<div class="flex justify-between">
 				<div></div>
 				<div class="flex items-center justify-end">
-					<div>
-						<AppTweetComposeLimit />
+					<div class="mr-2">
+						<AppTweetComposeLimit :body="form.body" />
 					</div>
 					<button
 						type="submit"

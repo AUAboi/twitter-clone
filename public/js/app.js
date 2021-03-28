@@ -1972,8 +1972,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "AppTweetComposeLimit",
+  props: {
+    body: {
+      required: true,
+      type: String
+    }
+  },
   data: function data() {
     return {
       radius: 30
@@ -1983,6 +1991,20 @@ __webpack_require__.r(__webpack_exports__);
     dash: function dash() {
       //to get diameter for dash/cut
       return 2 * Math.PI * this.radius;
+    },
+    percentage: function percentage() {
+      return Math.round(this.body.length * 100) / 280;
+    },
+    percentageIsOver: function percentageIsOver() {
+      return this.percentage > 100;
+    },
+    displayPercentage: function displayPercentage() {
+      return this.percentage <= 100 ? this.percentage : 100;
+    },
+    offset: function offset() {
+      var circ = this.dash;
+      var progress = this.displayPercentage / 100;
+      return circ * (1 - progress);
     }
   }
 });
@@ -46611,7 +46633,14 @@ var render = function() {
             _c("div"),
             _vm._v(" "),
             _c("div", { staticClass: "flex items-center justify-end" }, [
-              _c("div", [_c("AppTweetComposeLimit")], 1),
+              _c(
+                "div",
+                { staticClass: "mr-2" },
+                [
+                  _c("AppTweetComposeLimit", { attrs: { body: _vm.form.body } })
+                ],
+                1
+              ),
               _vm._v(" "),
               _c(
                 "button",
@@ -46649,8 +46678,48 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function () {}
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "h-10 w-10 relative" }, [
+    _c(
+      "svg",
+      {
+        staticClass: "transform -rotate-90",
+        attrs: { viewBox: "0 0 120 120" }
+      },
+      [
+        _c("circle", {
+          staticClass: "stroke-current text-gray-700",
+          attrs: {
+            cx: "60",
+            cy: "60",
+            fill: "none",
+            "stroke-width": "8",
+            r: _vm.radius
+          }
+        }),
+        _vm._v(" "),
+        _c("circle", {
+          staticClass: "stroke-current",
+          class: _vm.percentageIsOver ? "text-red-500" : "text-blue-500",
+          attrs: {
+            cx: "60",
+            cy: "60",
+            fill: "none",
+            "stroke-width": "8",
+            r: _vm.radius,
+            "stroke-dasharray": _vm.dash,
+            "stroke-dashoffset": _vm.offset
+          }
+        })
+      ]
+    )
+  ])
+}
 var staticRenderFns = []
+render._withStripped = true
 
 
 
