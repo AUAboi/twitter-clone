@@ -7,7 +7,10 @@
 			<AppTweetComposeTextarea v-model="form.body" />
 			<div class="flex justify-between">
 				<div></div>
-				<div>
+				<div class="flex items-center justify-end">
+					<div>
+						<AppTweetComposeLimit />
+					</div>
 					<button
 						type="submit"
 						class="bg-blue-500 rounded-full text-gray-300 text-center px-4 py-3 font-bold leading-none"

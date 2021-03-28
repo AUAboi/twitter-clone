@@ -36,7 +36,6 @@ export default {
 				this.unlikeTweet(this.tweet);
 				return;
 			}
-
 			this.likeTweet(this.tweet);
 		}
 	},

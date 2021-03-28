@@ -1,5 +1,5 @@
 <template>
-	<div class="flex w-full m-2">
+	<div class="flex w-full p-2">
 		<div class="mr-3">
 			<img :src="tweet.user.avatar" class="w-12 rounded-full" />
 		</div>

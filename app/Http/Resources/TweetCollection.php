@@ -4,7 +4,6 @@ namespace App\Http\Resources;
 
 use App\Http\Resources\TweetResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
-use PDO;
 
 class TweetCollection extends ResourceCollection
 {
