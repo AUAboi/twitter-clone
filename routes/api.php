@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Media\MediaTypesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Tweets\TweetController;
@@ -16,3 +17,5 @@ Route::delete('/tweets/{tweet}/likes', [TweetLikeController::class, 'destroy']);
 
 Route::post('/tweets/{tweet}/retweets', [TweetRetweetController::class, 'store']);
 Route::delete('/tweets/{tweet}/retweets', [TweetRetweetController::class, 'destroy']);
+
+Route::get('/media/types', [MediaTypesController::class, 'index']);

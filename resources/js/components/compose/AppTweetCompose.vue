@@ -6,7 +6,14 @@
 		<div class="flex-grow">
 			<AppTweetComposeTextarea v-model="form.body" />
 			<div class="flex justify-between">
-				<div></div>
+				<ul class="flex items-center">
+					<li class="mr-4">
+						<AppTweetComposeMediaButton
+							@selected="handleSelecetedMedia"
+							id="media-compose"
+						/>
+					</li>
+				</ul>
 				<div class="flex items-center justify-end">
 					<div class="mr-2">
 						<AppTweetComposeLimit :body="form.body" />
@@ -31,7 +38,12 @@ export default {
 	data() {
 		return {
 			form: {
-				body: ""
+				body: "",
+				media: []
+			},
+			media: {
+				images: [],
+				video: null
 			}
 		};
 	},
@@ -42,7 +54,9 @@ export default {
 			}
 			await axios.post("api/tweets", this.form);
 			this.form.body = "";
-		}
+		},
+
+		handleSelectedMedia(files) {}
 	}
 };
 </script>
