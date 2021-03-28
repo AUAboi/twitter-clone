@@ -1,3 +1,5 @@
+const plugin = require("tailwindcss/plugin");
+
 module.exports = {
     purge: [],
     darkMode: false, // or 'media' or 'class'
@@ -14,7 +16,20 @@ module.exports = {
         }
     },
     variants: {
-        extend: {}
+        //adding variant for important on text color properties
+        textColor: ["responsive", "hover", "focus", "important"]
     },
-    plugins: []
+    //to get important rule in tailwind classes
+    plugins: [
+        plugin(function({ addVariant }) {
+            addVariant("important", ({ container }) => {
+                container.walkRules(rule => {
+                    rule.selector = `.\\!${rule.selector.slice(1)}`;
+                    rule.walkDecls(decl => {
+                        decl.important = true;
+                    });
+                });
+            });
+        })
+    ]
 };

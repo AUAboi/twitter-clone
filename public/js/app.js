@@ -46702,8 +46702,8 @@ var render = function() {
         }),
         _vm._v(" "),
         _c("circle", {
-          staticClass: "stroke-current",
-          class: _vm.percentageIsOver ? "text-red-500" : "text-blue-500",
+          staticClass: "stroke-current text-blue-500",
+          class: _vm.percentageIsOver ? "!text-red-500" : "",
           attrs: {
             cx: "60",
             cy: "60",

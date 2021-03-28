@@ -15,8 +15,8 @@
 				fill="none"
 				stroke-width="8"
 				:r="radius"
-				class="stroke-current"
-				:class="percentageIsOver ? 'text-red-500' : 'text-blue-500'"
+				class="stroke-current text-blue-500"
+				:class="percentageIsOver ? '!text-red-500' : ''"
 				:stroke-dasharray="dash"
 				:stroke-dashoffset="offset"
 			/>
