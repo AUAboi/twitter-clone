@@ -5,11 +5,12 @@
 		</div>
 		<div class="flex-grow">
 			<AppTweetComposeTextarea v-model="form.body" />
+			<span class="text-gray-600">{{ media }}</span>
 			<div class="flex justify-between">
 				<ul class="flex items-center">
 					<li class="mr-4">
 						<AppTweetComposeMediaButton
-							@selected="handleSelecetedMedia"
+							@selected="handleSelectedMedia"
 							id="media-compose"
 						/>
 					</li>
@@ -44,7 +45,8 @@ export default {
 			media: {
 				images: [],
 				video: null
-			}
+			},
+			mediaTypes: {}
 		};
 	},
 	methods: {
@@ -56,7 +58,31 @@ export default {
 			this.form.body = "";
 		},
 
-		handleSelectedMedia(files) {}
+		async getMediaTypes() {
+			let res = await axios.get("/api/media/types");
+			this.mediaTypes = res.data.data;
+		},
+
+		handleSelectedMedia(files) {
+			//files will give list of files
+			Array.from(files)
+				.slice(0, 4)
+				.forEach(file => {
+					if (this.mediaTypes.image.includes(file.type)) {
+						this.media.images.push(file);
+					}
+					if (this.mediaTypes.video.includes(file.type)) {
+						this.media.video = file;
+					}
+				});
+
+			if (this.media.video) {
+				this.media.images = [];
+			}
+		}
+	},
+	mounted() {
+		this.getMediaTypes();
 	}
 };
 </script>

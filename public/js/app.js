@@ -1898,6 +1898,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "AppTweetCompose",
@@ -1910,7 +1911,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       media: {
         images: [],
         video: null
-      }
+      },
+      mediaTypes: {}
     };
   },
   methods: {
@@ -1944,7 +1946,51 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     },
-    handleSelectedMedia: function handleSelectedMedia(files) {}
+    getMediaTypes: function getMediaTypes() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().get("/api/media/types");
+
+              case 2:
+                res = _context2.sent;
+                _this2.mediaTypes = res.data.data;
+
+              case 4:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    },
+    handleSelectedMedia: function handleSelectedMedia(files) {
+      var _this3 = this;
+
+      //files will give list of files
+      Array.from(files).slice(0, 4).forEach(function (file) {
+        if (_this3.mediaTypes.image.includes(file.type)) {
+          _this3.media.images.push(file);
+        }
+
+        if (_this3.mediaTypes.video.includes(file.type)) {
+          _this3.media.video = file;
+        }
+      });
+
+      if (this.media.video) {
+        this.media.images = [];
+      }
+    }
+  },
+  mounted: function mounted() {
+    this.getMediaTypes();
   }
 });
 
@@ -46752,6 +46798,10 @@ var render = function() {
             }
           }),
           _vm._v(" "),
+          _c("span", { staticClass: "text-gray-600" }, [
+            _vm._v(_vm._s(_vm.media))
+          ]),
+          _vm._v(" "),
           _c("div", { staticClass: "flex justify-between" }, [
             _c("ul", { staticClass: "flex items-center" }, [
               _c(
@@ -46760,7 +46810,7 @@ var render = function() {
                 [
                   _c("AppTweetComposeMediaButton", {
                     attrs: { id: "media-compose" },
-                    on: { selected: _vm.handleSelecetedMedia }
+                    on: { selected: _vm.handleSelectedMedia }
                   })
                 ],
                 1
