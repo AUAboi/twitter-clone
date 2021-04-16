@@ -1,11 +1,13 @@
 <template>
 	<form @submit.prevent="submit" class="flex">
-		<div class="mr-3">
-			<img :src="$user.avatar" class="w-12 rounded-full" />
-		</div>
+		<img :src="$user.avatar" class="mr-3 w-12 h-12 rounded-full" />
 		<div class="flex-grow">
 			<AppTweetComposeTextarea v-model="form.body" />
 			<span class="text-gray-600">{{ media }}</span>
+
+			<AppTweetImagePreview :images="media.images" v-if="media.images.length" />
+			<AppTweetVideoPreview :video="media.video" v-if="media.video" />
+
 			<div class="flex justify-between">
 				<ul class="flex items-center">
 					<li class="mr-4">
