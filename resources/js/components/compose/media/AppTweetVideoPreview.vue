@@ -15,7 +15,7 @@ export default {
 	props: {
 		video: {
 			required: false,
-			type: Array
+			type: File
 		}
 	},
 	methods: {

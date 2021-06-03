@@ -2215,7 +2215,7 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     video: {
       required: false,
-      type: Array
+      type: File
     }
   },
   methods: {
