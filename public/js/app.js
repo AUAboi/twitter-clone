@@ -2214,7 +2214,7 @@ __webpack_require__.r(__webpack_exports__);
   name: "AppTweetVideoPreview",
   props: {
     video: {
-      required: false,
+      required: true,
       type: File
     }
   },

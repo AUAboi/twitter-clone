@@ -14,7 +14,7 @@ export default {
 	name: "AppTweetVideoPreview",
 	props: {
 		video: {
-			required: false,
+			required: true,
 			type: File
 		}
 	},
