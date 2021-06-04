@@ -5,8 +5,16 @@
 			<AppTweetComposeTextarea v-model="form.body" />
 			<span class="text-gray-600">{{ media }}</span>
 
-			<AppTweetImagePreview :images="media.images" v-if="media.images.length" />
-			<AppTweetVideoPreview :video="media.video" v-if="media.video" />
+			<AppTweetImagePreview
+				:images="media.images"
+				v-if="media.images.length"
+				@removed="removeImage"
+			/>
+			<AppTweetVideoPreview
+				:video="media.video"
+				v-if="media.video"
+				@removed="removeVideo"
+			/>
 
 			<div class="flex justify-between">
 				<ul class="flex items-center">
@@ -81,6 +89,18 @@ export default {
 			if (this.media.video) {
 				this.media.images = [];
 			}
+		},
+
+		removeVideo() {
+			this.media.video = null;
+		},
+
+		removeImage(image) {
+			//Loops through all images and return
+			// every i where i != image clicked for removal
+			this.media.images = this.media.images.filter(i => {
+				return image != i;
+			});
 		}
 	},
 	mounted() {

@@ -1901,6 +1901,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "AppTweetCompose",
@@ -1989,6 +1997,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       if (this.media.video) {
         this.media.images = [];
       }
+    },
+    removeVideo: function removeVideo() {
+      this.media.video = null;
+    },
+    removeImage: function removeImage(image) {
+      //Loops through all images and return
+      // every i where i != image clicked for removal
+      this.media.images = this.media.images.filter(function (i) {
+        return image != i;
+      });
     }
   },
   mounted: function mounted() {
@@ -2171,6 +2189,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "AppTweetImagePreview",
   props: {
@@ -2199,6 +2224,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -47027,12 +47059,16 @@ var render = function() {
           _vm._v(" "),
           _vm.media.images.length
             ? _c("AppTweetImagePreview", {
-                attrs: { images: _vm.media.images }
+                attrs: { images: _vm.media.images },
+                on: { removed: _vm.removeImage }
               })
             : _vm._e(),
           _vm._v(" "),
           _vm.media.video
-            ? _c("AppTweetVideoPreview", { attrs: { video: _vm.media.video } })
+            ? _c("AppTweetVideoPreview", {
+                attrs: { video: _vm.media.video },
+                on: { removed: _vm.removeVideo }
+              })
             : _vm._e(),
           _vm._v(" "),
           _c("div", { staticClass: "flex justify-between" }, [
@@ -47243,6 +47279,22 @@ var render = function() {
         "div",
         { key: index, staticClass: "w-6/12 flex-grow relative" },
         [
+          _c(
+            "a",
+            {
+              staticClass:
+                "bg-gray-900 w-8 h-8 rounded-full absolute top-0 right-0 mt-3 mr-3 flex items-center justify-center",
+              attrs: { href: "#" },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  return _vm.$emit("removed", image)
+                }
+              }
+            },
+            [_c("i", { staticClass: "far fa-window-close text-gray-300" })]
+          ),
+          _vm._v(" "),
           _c("img", {
             staticClass: "rounded-lg",
             attrs: { src: _vm.generateImagePreview(image) }
@@ -47276,7 +47328,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "mb-4" }, [
+  return _c("div", { staticClass: "mb-4 relative" }, [
     _c("video", {
       staticClass: "rounded-lg",
       attrs: {
@@ -47284,7 +47336,23 @@ var render = function() {
         preload: "",
         src: _vm.generateVideoPreview(_vm.video)
       }
-    })
+    }),
+    _vm._v(" "),
+    _c(
+      "a",
+      {
+        staticClass:
+          "bg-gray-900 w-8 h-8 rounded-full absolute top-0 right-0 mt-3 mr-3 flex items-center justify-center",
+        attrs: { href: "#" },
+        on: {
+          click: function($event) {
+            $event.preventDefault()
+            return _vm.$emit("removed", _vm.video)
+          }
+        }
+      },
+      [_c("i", { staticClass: "far fa-window-close text-gray-300" })]
+    )
   ])
 }
 var staticRenderFns = []
