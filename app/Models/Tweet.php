@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use PDO;
 
 class Tweet extends Model
 {
@@ -37,5 +38,10 @@ class Tweet extends Model
     public function retweetedTweet()
     {
         return $this->hasOne(Tweet::class, 'original_tweet_id', 'id');
+    }
+
+    public function media()
+    {
+        return $this->hasMany(TweetMedia::class);
     }
 }
