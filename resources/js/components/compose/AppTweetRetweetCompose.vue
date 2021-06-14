@@ -4,34 +4,11 @@
 		<div class="flex-grow">
 			<AppTweetComposeTextarea
 				v-model="form.body"
-				:placeholder="'Whats happening?'"
-			/>
-			<AppTweetMediaProgress
-				class="mb-4"
-				:progress="media.progress"
-				v-if="media.progress"
-			/>
-
-			<AppTweetImagePreview
-				:images="media.images"
-				v-if="media.images.length"
-				@removed="removeImage"
-			/>
-			<AppTweetVideoPreview
-				:video="media.video"
-				v-if="media.video"
-				@removed="removeVideo"
+				placeholder="Add a comment"
 			/>
 
 			<div class="flex justify-between">
-				<ul class="flex items-center">
-					<li class="mr-4">
-						<AppTweetComposeMediaButton
-							@selected="handleSelectedMedia"
-							id="media-compose"
-						/>
-					</li>
-				</ul>
+				<ul class="flex items-center"></ul>
 				<div class="flex items-center justify-end">
 					<div class="mr-2">
 						<AppTweetComposeLimit :body="form.body" />
@@ -40,7 +17,7 @@
 						type="submit"
 						class="bg-blue-500 rounded-full text-gray-300 text-center px-4 py-3 font-bold leading-none"
 					>
-						Tweet
+						Retweet
 					</button>
 				</div>
 			</div>
@@ -54,7 +31,7 @@ import axios from "axios";
 import compose from "../../mixins/compose.js";
 
 export default {
-	name: "AppTweetCompose",
+	name: "AppTweetRetweetCompose",
 	mixins: [compose],
 	methods: {
 		async post() {
