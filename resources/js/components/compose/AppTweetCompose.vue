@@ -3,7 +3,11 @@
 		<img :src="$user.avatar" class="mr-3 w-12 h-12 rounded-full" />
 		<div class="flex-grow">
 			<AppTweetComposeTextarea v-model="form.body" />
-			<span class="text-gray-600">{{ media }}</span>
+			<AppTweetMediaProgress
+				class="mb-4"
+				:progress="media.progress"
+				v-if="media.progress"
+			/>
 
 			<AppTweetImagePreview
 				:images="media.images"
@@ -54,7 +58,8 @@ export default {
 			},
 			media: {
 				images: [],
-				video: null
+				video: null,
+				progress: 0
 			},
 			mediaTypes: {}
 		};
@@ -62,23 +67,33 @@ export default {
 	methods: {
 		async submit() {
 			//this will get ids for uploaded media
-			let media = await this.uploadMedia();
+			if (this.media.images.length || this.media.video) {
+				let media = await this.uploadMedia();
+			}
 
 			this.form.media = media.data.data.map(r => r.id);
-			
+
 			await axios.post("/api/tweets", this.form);
 
 			this.form.body = "";
 			this.form.media = [];
 			this.media.video = null;
-			this.media.images = []
+			this.media.images = [];
+			this.media.progress = 0;
+		},
+
+		handleUploadProgress(event) {
+			this.media.progress = parseInt(
+				Math.round((event.loaded / event.total) * 100)
+			);
 		},
 
 		async uploadMedia() {
 			return await axios.post("/api/media", this.buildMediaForm(), {
 				headers: {
 					"Content-Type": "multipart/form-data"
-				}
+				},
+				onUploadProgress: this.handleUploadProgress
 			});
 		},
 		buildMediaForm() {
