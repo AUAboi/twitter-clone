@@ -1943,11 +1943,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this.form.media = media.data.data.map(function (r) {
                   return r.id;
                 });
-                console.log(_this.form); // await axios.post("/api/tweets", this.form);
-
-                _this.form.body = "";
+                _context.next = 6;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().post("/api/tweets", _this.form);
 
               case 6:
+                _this.form.body = "";
+                _this.form.media = [];
+                _this.media.video = null;
+                _this.media.images = [];
+
+              case 10:
               case "end":
                 return _context.stop();
             }
