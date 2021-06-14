@@ -1935,14 +1935,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var _media;
-
+        var media;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 if (!(_this.media.images.length || _this.media.video)) {
-                  _context.next = 4;
+                  _context.next = 5;
                   break;
                 }
 
@@ -1950,12 +1949,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _this.uploadMedia();
 
               case 3:
-                _media = _context.sent;
-
-              case 4:
+                media = _context.sent;
                 _this.form.media = media.data.data.map(function (r) {
                   return r.id;
                 });
+
+              case 5:
                 _context.next = 7;
                 return axios__WEBPACK_IMPORTED_MODULE_1___default().post("/api/tweets", _this.form);
 

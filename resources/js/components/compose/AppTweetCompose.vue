@@ -69,9 +69,8 @@ export default {
 			//this will get ids for uploaded media
 			if (this.media.images.length || this.media.video) {
 				let media = await this.uploadMedia();
+				this.form.media = media.data.data.map(r => r.id);
 			}
-
-			this.form.media = media.data.data.map(r => r.id);
 
 			await axios.post("/api/tweets", this.form);
 
