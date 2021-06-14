@@ -17,7 +17,8 @@ module.exports = {
     },
     variants: {
         //adding variant for important on text color properties
-        textColor: ["responsive", "hover", "focus", "important"]
+        textColor: ["responsive", "hover", "focus", "important"],
+        backgroundColor: ["responsive", "hover", "focus", "important"]
     },
     //to get important rule in tailwind classes
     plugins: [

@@ -29,10 +29,10 @@
     </script>
 </head>
 <body>
-    <div id="app">
-        
+    <div id="app"> 
         <main class="container mx-auto">
             @yield('content')
+
         </main>
     </div>
 </body>

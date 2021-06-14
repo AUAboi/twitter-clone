@@ -8,7 +8,9 @@
 			<AppDropdownItem @click.prevent="retweetOrUnretweet">
 				Retweet
 			</AppDropdownItem>
-			<AppDropdownItem>
+			<AppDropdownItem
+				@click.prevent="$modal.show(AppTweetRetweetModal, { tweet })"
+			>
 				Retweet with comment
 			</AppDropdownItem>
 		</AppDropdown>
@@ -24,6 +26,8 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 
+import AppTweetRetweetModal from "../../modals/AppTweetRetweetModal.vue";
+
 export default {
 	name: "AppTweetRetweetAction",
 	props: {
@@ -31,6 +35,11 @@ export default {
 			required: true,
 			type: Object
 		}
+	},
+	data() {
+		return {
+			AppTweetRetweetModal
+		};
 	},
 	computed: {
 		...mapGetters({
