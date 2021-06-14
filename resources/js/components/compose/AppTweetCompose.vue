@@ -61,7 +61,14 @@ export default {
 	},
 	methods: {
 		async submit() {
-			await this.uploadMedia();
+			//this will get ids for uploaded media
+			let media = await this.uploadMedia();
+
+			this.form.media = media.data.data.map(r => r.id);
+
+			console.log(this.form);
+
+			// await axios.post("/api/tweets", this.form);
 			this.form.body = "";
 		},
 
