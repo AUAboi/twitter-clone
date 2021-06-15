@@ -51,10 +51,10 @@ export default {
             });
         },
 
-        POP_TWEET(state, id){
-            state.tweets= state.tweets.filter(tweet =>{
-                return tweet.id != id
-            } )
+        POP_TWEET(state, id) {
+            state.tweets = state.tweets.filter(tweet => {
+                return tweet.id != id;
+            });
         }
     },
 
@@ -73,6 +73,10 @@ export default {
             });
 
             return res;
+        },
+
+        async quoteTweet(_, { tweet, data }) {
+            await axios.post(`/api/tweets/${tweet.id}/quotes`, data);
         }
     }
 };

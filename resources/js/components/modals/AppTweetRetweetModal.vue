@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<AppTweetRetweetCompose />
+		<AppTweetRetweetCompose @success="$emit('close')" :tweet="tweet" />
 		<component
 			v-if="tweet"
 			class="border border-gray-700 rounded-lg mt-4 p-4"

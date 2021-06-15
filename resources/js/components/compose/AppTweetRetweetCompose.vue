@@ -27,15 +27,30 @@
 
 <script>
 import axios from "axios";
+import { mapActions } from "vuex";
 
 import compose from "../../mixins/compose.js";
 
 export default {
 	name: "AppTweetRetweetCompose",
+	props: {
+		tweet: {
+			required: true,
+			type: Object
+		}
+	},
 	mixins: [compose],
 	methods: {
+		...mapActions({
+			quoteTweet: "timeline/quoteTweet"
+		}),
 		async post() {
-			axios.post("/api/tweets", this.form);
+			await this.quoteTweet({
+				tweet: this.tweet,
+				data: this.form
+			});
+
+			this.$emit("success");
 		}
 	}
 };
