@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use PDO;
@@ -12,6 +13,13 @@ class Tweet extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    //Scope to only show parent tweets
+
+    public function scopeParent(Builder $builder)
+    {
+        return $builder->whereNull('parent_id');
+    }
 
     public function user()
     {
@@ -43,5 +51,10 @@ class Tweet extends Model
     public function media()
     {
         return $this->hasMany(TweetMedia::class);
+    }
+
+    public function replies()
+    {
+        return $this->hasMany(Tweet::class, 'parent_id');
     }
 }
