@@ -4,7 +4,7 @@
 		<div class="flex-grow">
 			<AppTweetComposeTextarea
 				v-model="form.body"
-				:placeholder="'Whats happening?'"
+				:placeholder="'Tweet your reply'"
 			/>
 			<AppTweetMediaProgress
 				class="mb-4"
@@ -25,12 +25,11 @@
 
 			<div class="flex justify-between">
 				<ul class="flex items-center">
+					<!--id is prop to determine if button is for reply or tweet -->
 					<li class="mr-4">
-						<!--id is prop to determine if button is for reply or tweet -->
-
 						<AppTweetComposeMediaButton
 							@selected="handleSelectedMedia"
-							id="media-compose"
+							id="media-compose-reply"
 						/>
 					</li>
 				</ul>
@@ -58,9 +57,15 @@ import compose from "../../mixins/compose.js";
 export default {
 	name: "AppTweetCompose",
 	mixins: [compose],
+	props: {
+		tweet: {
+			required: true,
+			type: Object
+		}
+	},
 	methods: {
 		async post() {
-			axios.post("/api/tweets", this.form);
+			console.log("reply");
 		}
 	}
 };
