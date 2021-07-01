@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import { mapActions } from "vuex";
 
 import compose from "../../mixins/compose.js";
 
@@ -64,8 +64,16 @@ export default {
 		}
 	},
 	methods: {
+		...mapActions({
+			replyToTweet: "timeline/replyToTweet"
+		}),
 		async post() {
-			console.log("reply");
+			await this.replyToTweet({
+				tweet: this.tweet,
+				data: this.form
+			});
+
+			this.$emit("success");
 		}
 	}
 };
