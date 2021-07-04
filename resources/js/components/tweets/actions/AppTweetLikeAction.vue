@@ -48,7 +48,6 @@ export default {
 			//check if users like includes this tweet
 			return this.likes.includes(this.tweet.id);
 		}
-	},
-	mounted() {}
+	}
 };
 </script>
