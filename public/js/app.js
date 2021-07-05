@@ -2839,8 +2839,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       //check if users like includes this tweet
       return this.likes.includes(this.tweet.id);
     }
-  }),
-  mounted: function mounted() {}
+  })
 });
 
 /***/ }),

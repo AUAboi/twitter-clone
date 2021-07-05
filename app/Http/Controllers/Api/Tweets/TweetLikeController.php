@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Tweets;
 use App\Events\Tweets\TweetLikesWereUpdated;
 use App\Http\Controllers\Controller;
 use App\Models\Tweet;
+use App\Notifications\Tweets\TweetLiked;
 use Illuminate\Http\Request;
 
 class TweetLikeController extends Controller
@@ -25,6 +26,14 @@ class TweetLikeController extends Controller
                 'tweet_id' => $tweet->id
             ]
         );
+
+
+        // if ($request->user()->id !== $tweet->user_id) {
+        //Create notifiction using laravels notify method
+
+        $tweet->user->notify(new TweetLiked($request->user(), $tweet));
+        // }
+
 
         broadcast(new TweetLikesWereUpdated($request->user(), $tweet));
     }

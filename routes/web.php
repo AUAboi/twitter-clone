@@ -1,8 +1,8 @@
 <?php
 
-use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Notifications\NotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,8 +23,4 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-
-//Test stuff, remove later
-Route::get('users/{id}', function ($id) {
-    return User::find($id);
-});
+Route::get('/notifications', [NotificationController::class, 'index']);
